@@ -1,59 +1,40 @@
 
+using Photon.Pun;
 using UnityEngine;
 
-public class Movment : MonoBehaviour {
+public class Movment : MonoBehaviourPun
+{
 
 
-     public  float speed;
-     float x;
-     float y;
-    Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    private Rigidbody2D rb;
+    private Vector2 movement;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
+        // Disable control for remote players
+        if (!photonView.IsMine)
+        {
+            Destroy(GetComponent<Movment>());
+        }
     }
 
-    
     void Update()
     {
-        
-        {
-            takeInpute();
-        }
-    }
-  
-    private void FixedUpdate()
-    {
-        
-        {
-            move();
-        }
-       
-    }
-    
-    void takeInpute() 
-    {
+        if (!photonView.IsMine) return;
 
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
-    
-    }
-    
-    void move() 
-    {
-
-        RpcCommad();
-    
+        // Get movement input
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
-    
-    void  RpcCommad() 
+    void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(x * speed * 10 * Time.deltaTime, y * speed * 10 * Time.deltaTime);
+        rb.linearVelocity = movement.normalized * moveSpeed;
     }
+
 
 
 

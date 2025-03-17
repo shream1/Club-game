@@ -1,10 +1,12 @@
+
 using UnityEngine;
 
-public class Movment : MonoBehaviour
-{
+public class Movment : MonoBehaviour {
+
 
      public  float speed;
      float x;
+     float y;
     Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,27 +16,45 @@ public class Movment : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        takeInpute();
+        
+        {
+            takeInpute();
+        }
     }
+  
     private void FixedUpdate()
     {
-        move();
+        
+        {
+            move();
+        }
+       
     }
-
+    
     void takeInpute() 
     {
 
         x = Input.GetAxisRaw("Horizontal");
+        y = Input.GetAxisRaw("Vertical");
     
     }
-
+    
     void move() 
     {
 
-        rb.linearVelocity = new Vector2(x * speed * Time.deltaTime,0);
+        RpcCommad();
     
     }
+
+    
+    void  RpcCommad() 
+    {
+        rb.linearVelocity = new Vector2(x * speed * 10 * Time.deltaTime, y * speed * 10 * Time.deltaTime);
+    }
+
+
+
 }

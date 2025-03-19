@@ -97,7 +97,7 @@ public class WeaponController : MonoBehaviour
             //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
             InstantiateBullet(firePoint.position, transform.up * -1f);
 
-            InstantiateBullet(firePoint.position, transform.right);
+          // InstantiateBullet(firePoint.position, transform.right);
 
             PlayShootSound();
             currentAmmo--;
@@ -115,7 +115,7 @@ public class WeaponController : MonoBehaviour
                 float randomOffset = Random.Range(-spreadAngle / 2, spreadAngle / 2);
                 Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
                 Vector3 direction = spreadRotation * transform.right;
-                InstantiateBullet(firePoint.position, direction);
+                //InstantiateBullet(firePoint.position, direction);
 
                 InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
 
@@ -134,7 +134,7 @@ public class WeaponController : MonoBehaviour
             // InstantiateBullet(firePoint.position, transform.forward);\
             InstantiateBullet(firePoint.position, transform.up * -1f);
 
-            InstantiateBullet(firePoint.position, transform.right);
+            //InstantiateBullet(firePoint.position, transform.right);
 
             PlayShootSound();
             currentAmmo--;

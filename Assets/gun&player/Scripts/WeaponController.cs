@@ -36,8 +36,12 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     Vector3 direction;
     public float distanceFromPlayer;
+=======
+ 
+>>>>>>> Stashed changes
     private void RotateWeaponWithMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,6 +54,7 @@ public class WeaponController : MonoBehaviour
 
      
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
+<<<<<<< Updated upstream
        
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
 
@@ -59,6 +64,9 @@ public class WeaponController : MonoBehaviour
             transform.position = targetPosition;
         
      
+=======
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
+>>>>>>> Stashed changes
     }
 
     
@@ -86,8 +94,12 @@ public class WeaponController : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
+<<<<<<< Updated upstream
             //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
             InstantiateBullet(firePoint.position, transform.up * -1f);
+=======
+            InstantiateBullet(firePoint.position, transform.right);
+>>>>>>> Stashed changes
             PlayShootSound();
             currentAmmo--;
         }
@@ -105,7 +117,10 @@ public class WeaponController : MonoBehaviour
                 Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
                 Vector3 direction = spreadRotation * transform.right;
                 InstantiateBullet(firePoint.position, direction);
+<<<<<<< Updated upstream
                 InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
+=======
+>>>>>>> Stashed changes
             }
             PlayShootSound();
             currentAmmo -= 3;
@@ -117,8 +132,12 @@ public class WeaponController : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
+<<<<<<< Updated upstream
             // InstantiateBullet(firePoint.position, transform.forward);\
             InstantiateBullet(firePoint.position, transform.up * -1f);
+=======
+            InstantiateBullet(firePoint.position, transform.right);
+>>>>>>> Stashed changes
             PlayShootSound();
             currentAmmo--;
         }

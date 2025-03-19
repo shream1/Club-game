@@ -103,20 +103,20 @@ TextureImporter:
       name: flower.png_0
       rect:
         serializedVersion: 2
-        x: 144
-        y: 145
-        width: 202
-        height: 198
+        x: 145
+        y: 146
+        width: 200
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7c8e89a8b345a8fc0800000000000000
-      internalID: -3491885946367317817
+      spriteID: 55f9da5a02d8a734f950ec670052f66e
+      internalID: 2120381626
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b774f82a19b35f9428d80c4adc9c74b6
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      flower.png_0: 2120381626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

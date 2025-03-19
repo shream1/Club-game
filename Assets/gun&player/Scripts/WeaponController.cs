@@ -114,10 +114,10 @@ public class WeaponController : MonoBehaviour
             {
                 float randomOffset = Random.Range(-spreadAngle / 2, spreadAngle / 2);
                 Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
-                Vector3 direction = spreadRotation * transform.right;
-                //InstantiateBullet(firePoint.position, direction);
+                Vector3 direction = spreadRotation * transform.up*-1;
+                InstantiateBullet(firePoint.position, direction);
 
-                InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
+                //InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
 
             }
             PlayShootSound();

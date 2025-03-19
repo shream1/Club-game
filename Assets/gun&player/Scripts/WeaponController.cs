@@ -36,7 +36,8 @@ public class WeaponController : MonoBehaviour
         }
     }
 
- 
+    Vector3 direction;
+    public float distanceFromPlayer;
     private void RotateWeaponWithMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -49,7 +50,15 @@ public class WeaponController : MonoBehaviour
 
      
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
+       
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
+
+        Vector2 offset = direction.normalized * distanceFromPlayer;
+        Vector2 targetPosition = (Vector2)player.position + offset;
+        // Set the position of the rotating object
+            transform.position = targetPosition;
+        
+     
     }
 
     
@@ -77,7 +86,8 @@ public class WeaponController : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
-            InstantiateBullet(firePoint.position, transform.right);
+            //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
+            InstantiateBullet(firePoint.position, transform.up * -1f);
             PlayShootSound();
             currentAmmo--;
         }
@@ -95,6 +105,7 @@ public class WeaponController : MonoBehaviour
                 Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
                 Vector3 direction = spreadRotation * transform.right;
                 InstantiateBullet(firePoint.position, direction);
+                InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
             }
             PlayShootSound();
             currentAmmo -= 3;
@@ -106,7 +117,8 @@ public class WeaponController : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
-            InstantiateBullet(firePoint.position, transform.right);
+            // InstantiateBullet(firePoint.position, transform.forward);\
+            InstantiateBullet(firePoint.position, transform.up * -1f);
             PlayShootSound();
             currentAmmo--;
         }

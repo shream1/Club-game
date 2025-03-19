@@ -116,7 +116,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 55f9da5a02d8a734f950ec670052f66e
-      internalID: 2120381626
+      internalID: -3491885946367317817
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      flower.png_0: 2120381626
+      flower.png_0: -3491885946367317817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

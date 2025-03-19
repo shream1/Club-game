@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      starwhite.png_0: 3276911354832549230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

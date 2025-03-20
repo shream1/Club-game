@@ -11,6 +11,7 @@ public class player_hp_system : MonoBehaviour
     public double timer;
     public TextMeshProUGUI HpText;
     public GameObject[] images;
+    [SerializeField] private GameObject deathEffect;
     void Start()
     {
         hp = new HP();
@@ -76,7 +77,7 @@ public class player_hp_system : MonoBehaviour
             healing();
         }
 
-        if (outOfCompat && timer<15)
+        if (timer<15)
         {
             timer += time;
         }
@@ -85,26 +86,15 @@ public class player_hp_system : MonoBehaviour
     {
         hp.sethp(1*time);
     }
-
-    private void OutOfCompat()
+    public void TakeDamage(int damage)
     {
-        outOfCompat = true;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("bullet")) 
-        { 
-            hp.sethp(-15);
-            timer = 0;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("bullet"))
+        hp.sethp(-damage);
+        if (health <= 0)
         {
-            OutOfCompat();
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
         }
+        timer = 0;
     }
 
 }

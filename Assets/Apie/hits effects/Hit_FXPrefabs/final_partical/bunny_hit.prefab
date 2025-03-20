@@ -4994,6 +4994,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: F_bunny_hit
       objectReference: {fileID: 0}
+    - target: {fileID: 2204083708358639271, guid: 682936a69b4ce854192920bc5f998ee1, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2296660978951176916, guid: 682936a69b4ce854192920bc5f998ee1, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

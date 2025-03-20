@@ -28,9 +28,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy")) 
+        if (collision.CompareTag("Player")) 
         {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            collision.GetComponent<player_hp_system>().TakeDamage(damage);
             Instantiate(impactEffect, transform.position, Quaternion.identity); 
             Destroy(gameObject);
         }

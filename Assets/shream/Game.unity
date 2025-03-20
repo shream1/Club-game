@@ -3593,9 +3593,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 8374067254176455343, guid: 3c7e5c9a81121ce42a810f59176db417, type: 3}
-  - {fileID: 6079665344442154664, guid: 85d620b25e9b02049b5e7943b1862c04, type: 3}
-  - {fileID: 1199473412664228428, guid: acc02e99f3d830846957bbed27bbf164, type: 3}
+  - {fileID: 8374067254176455343, guid: e8f59739b61c12241bd8a089d5cd39bf, type: 3}
+  - {fileID: 6079665344442154664, guid: b30f3e5d455e1874eb9b4e62c3f100b1, type: 3}
+  - {fileID: 1199473412664228428, guid: 7c8d58f74fa58364fa9fa1bb08c1e3d9, type: 3}
   spawnNodes:
   - {fileID: 514442083}
   - {fileID: 887636540}

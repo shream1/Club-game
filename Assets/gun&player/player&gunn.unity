@@ -560,12 +560,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555915839}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 994952184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &555915843
 MonoBehaviour:
@@ -656,6 +656,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 116652372}
+  - {fileID: 555915842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &661606566118708913
@@ -780,7 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 116652372}
   orbitRadius: 1.5
-  bulletPrefab: {fileID: 8955535046533793831, guid: e3e73681669fd234abf87700eb8f914f, type: 3}
+  bulletPrefab: {fileID: 4888204551241634682, guid: 209be98220ac8da4ca5414348a8cba6d, type: 3}
   firePoint: {fileID: 8249057987576913394}
   bulletSound: {fileID: 8300000, guid: 73d6130af2eeb954ca146d2a8d760f88, type: 3}
   fireRate: 0.2
@@ -985,6 +986,5 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 555915842}
   - {fileID: 994952184}
   - {fileID: 239141070}

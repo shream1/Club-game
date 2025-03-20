@@ -4901,7 +4901,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8955535046533793831}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -4919,7 +4919,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!114 &8521345607770401765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4935,7 +4935,7 @@ MonoBehaviour:
   speed: 25
   lifeTime: 2
   damage: 10
-  impactEffect: {fileID: 8955535046533793831}
+  impactEffect: {fileID: 4630215533953821660, guid: 749da38c454a2ba49b46196b04028e97, type: 3}
 --- !u!61 &-3613255474328641157
 BoxCollider2D:
   m_ObjectHideFlags: 0

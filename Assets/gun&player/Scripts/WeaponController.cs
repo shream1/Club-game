@@ -34,6 +34,8 @@ public class WeaponController : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+        
+        
     }
 
 
@@ -61,9 +63,14 @@ public class WeaponController : MonoBehaviour
         Vector2 targetPosition = (Vector2)player.position + offset;
         // Set the position of the rotating object
             transform.position = targetPosition;
-        
-     
-
+        if (direction.x > 0) 
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); 
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
 
     }
@@ -95,7 +102,7 @@ public class WeaponController : MonoBehaviour
         {
 
             //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
-            InstantiateBullet(firePoint.position, transform.up * -1f);
+            InstantiateBullet(firePoint.position, transform.up);
 
           // InstantiateBullet(firePoint.position, transform.right);
 
@@ -114,7 +121,7 @@ public class WeaponController : MonoBehaviour
             {
                 float randomOffset = Random.Range(-spreadAngle / 2, spreadAngle / 2);
                 Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
-                Vector3 direction = spreadRotation * transform.up*-1;
+                Vector3 direction = spreadRotation * transform.up;
                 InstantiateBullet(firePoint.position, direction);
 
                 //InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
@@ -131,8 +138,8 @@ public class WeaponController : MonoBehaviour
         if (currentAmmo > 0)
         {
 
-            // InstantiateBullet(firePoint.position, transform.forward);\
-            InstantiateBullet(firePoint.position, transform.up * -1f);
+            // InstantiateBullet(firePoint.position, transform.forward);
+            InstantiateBullet(firePoint.position, transform.up);
 
             //InstantiateBullet(firePoint.position, transform.right);
 
@@ -145,7 +152,7 @@ public class WeaponController : MonoBehaviour
     private void InstantiateBullet(Vector3 position, Vector3 direction)
     {
         GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(-direction);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
     }
 
    

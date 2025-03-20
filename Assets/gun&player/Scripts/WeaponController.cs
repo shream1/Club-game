@@ -75,20 +75,21 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    
+
     private void HandleShooting()
     {
         if (currentAmmo <= 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
+            nextFireTime = Time.time + fireRate;
             ShootPistol();
         }
         else if (Input.GetMouseButtonDown(1))
         {
             ShootShotgun();
         }
-        else if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+        else if (Input.GetMouseButton(0) && Time.time >= nextFireTime )
         {
             nextFireTime = Time.time + fireRate;
             ShootAutoGun();

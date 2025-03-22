@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
+using UnityEditor.SceneManagement;
+using UnityEditor.VersionControl;
 
-public class Submarin : MonoBehaviour
+public class Submarin : MonoBehaviourPun
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
@@ -17,6 +20,11 @@ public class Submarin : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (!photonView.IsMine)
+        {
+            Destroy(GetComponent<Submarin>());
+        }
+
         audioSource = GetComponent<AudioSource>();
         currentAmmo = maxAmmo;
     }
@@ -24,44 +32,58 @@ public class Submarin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isReloading) return;
-
-        HandleShooting();
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (photonView.IsMine)
         {
-            StartCoroutine(Reload());
+            if (isReloading) return;
+
+            HandleShooting();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Reload());
+            }
         }
     }
 
     private void HandleShooting()
     {
-        if (currentAmmo <= 0) return;
-        else if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+        if (photonView.IsMine)
         {
-            nextFireTime = Time.time + fireRate;
-            ShootAutoGun();
+            if (currentAmmo <= 0) return;
+            else if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+                ShootAutoGun();
+            }
         }
     }
     private void ShootAutoGun()
     {
-        if (currentAmmo > 0)
+        if (photonView.IsMine)
         {
+            if (currentAmmo > 0)
+            {
 
-            // InstantiateBullet(firePoint.position, transform.forward);
-            InstantiateBullet(firePoint.position, transform.up);
+                // InstantiateBullet(firePoint.position, transform.forward);
+                InstantiateBullet(firePoint.position, transform.up);
 
-            //InstantiateBullet(firePoint.position, transform.right);
+                //InstantiateBullet(firePoint.position, transform.right);
 
-            PlayShootSound();
-            currentAmmo--;
+                PlayShootSound();
+                currentAmmo--;
+            }
         }
     }
 
     private void InstantiateBullet(Vector3 position, Vector3 direction)
     {
-        GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(direction);
+        if (photonView.IsMine)
+        {
+            string bullName = bulletPrefab.name;
+
+            GameObject bullet = PhotonNetwork.Instantiate("bunny_hit", position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().SetDirection(direction);
+        }
     }
     private void PlayShootSound()
     {

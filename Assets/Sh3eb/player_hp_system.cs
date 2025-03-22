@@ -1,8 +1,9 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
-public class player_hp_system : MonoBehaviour
+public class player_hp_system : MonoBehaviourPun
 {
     HP hp ;
     public int health;
@@ -14,65 +15,78 @@ public class player_hp_system : MonoBehaviour
     [SerializeField] private GameObject deathEffect;
     void Start()
     {
-        hp = new HP();
+        if (!photonView.IsMine)
+        {
+            Destroy(GetComponent<HP>());
+        }
+        else
+        {
+            hp = new HP();
+        }
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        heal_system();
-        time = Time.deltaTime;
-        health = (int)hp.Gethp();
-        HpText.text = health + "/100";
+        if (photonView.IsMine)
+        {
+            heal_system();
+            time = Time.deltaTime;
+            health = (int)hp.Gethp();
+            HpText.text = health + "/100";
 
-        HPUI();
+            HPUI();
+        }
     }
 
     private void HPUI()
     {
-        switch (health)
-        {
-            case  <1:
-                {
-                    images[0].active = false;
-                    images[1].active = false;
-                    images[2].active = false;
-                    images[3].active = false;
-                }; break;
-            case < 25:
-                {
-                    images[0].active = true;
-                    images[1].active = false;
-                    images[2].active = false;
-                    images[3].active = false;
-                }; break;
-            case < 50: 
-                {
-                    images[0].active = true;
-                    images[1].active = true;
-                    images[2].active = false;
-                    images[3].active = false;
-                }; break;
-            case < 75:
-                {
-                    images[0].active = true;
-                    images[1].active = true;
-                    images[2].active = true;
-                    images[3].active = false;
-                }; break;
-            default:
-                {
-                    images[0].active = true;
-                    images[1].active = true;
-                    images[2].active = true;
-                    images[3].active = true;
-                }; break;
+        if (photonView.IsMine) {
+            switch (health)
+            {
+                case < 1:
+                    {
+                        images[0].active = false;
+                        images[1].active = false;
+                        images[2].active = false;
+                        images[3].active = false;
+                    }; break;
+                case < 25:
+                    {
+                        images[0].active = true;
+                        images[1].active = false;
+                        images[2].active = false;
+                        images[3].active = false;
+                    }; break;
+                case < 50:
+                    {
+                        images[0].active = true;
+                        images[1].active = true;
+                        images[2].active = false;
+                        images[3].active = false;
+                    }; break;
+                case < 75:
+                    {
+                        images[0].active = true;
+                        images[1].active = true;
+                        images[2].active = true;
+                        images[3].active = false;
+                    }; break;
+                default:
+                    {
+                        images[0].active = true;
+                        images[1].active = true;
+                        images[2].active = true;
+                        images[3].active = true;
+                    }; break;
+            }
         }  
     }
     private void heal_system()
     {
-        if (timer >= 15 && !(hp.Gethp() > 100))
+        if (!photonView.IsMine) return;
+            if (timer >= 15 && !(hp.Gethp() > 100))
         {
             healing();
         }
@@ -84,10 +98,12 @@ public class player_hp_system : MonoBehaviour
     }
     private void healing()
     {
-        hp.sethp(1*time);
+        if (!photonView.IsMine)return;
+            hp.sethp(1*time);
     }
     public void TakeDamage(int damage)
     {
+        if (!photonView.IsMine) return;
         hp.sethp(-damage);
         if (health <= 0)
         {

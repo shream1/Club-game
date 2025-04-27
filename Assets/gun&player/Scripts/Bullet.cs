@@ -39,11 +39,24 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && photonView.IsMine)
+        if (collision.CompareTag("Player") )
         {
+
+            PhotonView pv = collision.GetComponent<PhotonView>();
+
+            if (pv != null) 
+            {
+
+                collision.GetComponent<player_hp_system>().TakeDamage(damage);
+                PhotonNetwork.Instantiate(impactEffect.name, transform.position, Quaternion.identity);
+                PhotonNetwork.Destroy(gameObject);
+
+            }
+            /*
             collision.GetComponent<player_hp_system>()?.TakeDamage(damage);
             PhotonNetwork.Instantiate(impactEffect.name, transform.position, Quaternion.identity);
             PhotonNetwork.Destroy(gameObject);
+            */
         }
         else if (collision.CompareTag("Bullet") && photonView.IsMine)
         {

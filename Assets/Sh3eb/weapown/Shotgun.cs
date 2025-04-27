@@ -26,55 +26,69 @@ public class Shotgun : MonoBehaviourPun
     void Update()
     {
 
-        if (!photonView.IsMine) return;
-        if (isReloading) return;
-
-        HandleShooting();
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (photonView.IsMine)
         {
-            StartCoroutine(Reload());
+            if (isReloading) return;
+
+            HandleShooting();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Reload());
+            }
         }
     }
     private void HandleShooting()
     {
-        if (currentAmmo <= 0) return;
-
-        if (Input.GetMouseButtonDown(0))
+        if (photonView.IsMine)
         {
-            nextFireTime = Time.time + fireRate;
-            ShootShotgun();
+            if (currentAmmo <= 0) return;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextFireTime = Time.time + fireRate;
+                ShootShotgun();
+            }
         }
     }
     private void ShootShotgun()
     {
-        if (currentAmmo > 0)
+        if (photonView.IsMine)
         {
-            float spreadAngle = 10f;
-            for (int i = -1; i <= 3; i++)
+            if (currentAmmo > 0)
             {
-                float randomOffset = Random.Range(-spreadAngle / 4, spreadAngle / 4);
-                Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
-                Vector3 direction = spreadRotation * transform.up;
-                InstantiateBullet(firePoint.position, direction);
+                float spreadAngle = 10f;
+                for (int i = -1; i <= 3; i++)
+                {
+                    float randomOffset = Random.Range(-spreadAngle / 4, spreadAngle / 4);
+                    Quaternion spreadRotation = Quaternion.Euler(0, 0, i * spreadAngle + randomOffset);
+                    Vector3 direction = spreadRotation * transform.up;
+                    InstantiateBullet(firePoint.position, direction);
 
-                //InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
+                    //InstantiateBullet(firePoint.position, transform.up * -1f * direction.normalized.y);
 
+                }
+                PlayShootSound();
+                currentAmmo--;
             }
-            PlayShootSound();
-            currentAmmo--;
         }
     }
     private void InstantiateBullet(Vector3 position, Vector3 direction)
     {
-        GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(direction);
+        if (photonView.IsMine) {
+            GameObject bullet = PhotonNetwork.Instantiate("magical_hit", position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().SetDirection(direction);
+      }
     }
+
     private void PlayShootSound()
     {
-        if (bulletSound != null && audioSource != null)
+        if (photonView.IsMine)
         {
-            audioSource.PlayOneShot(bulletSound);
+            if (bulletSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(bulletSound);
+            }
         }
     }
 

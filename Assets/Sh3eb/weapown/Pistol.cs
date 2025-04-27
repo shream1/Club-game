@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
-public class Pistol : MonoBehaviour
+public class Pistol : MonoBehaviourPun
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
@@ -17,6 +18,11 @@ public class Pistol : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (!photonView.IsMine) 
+        {
+            Destroy(GetComponent<Pistol>());
+
+        }
         audioSource = GetComponent<AudioSource>();
         currentAmmo = maxAmmo;
     }
@@ -24,47 +30,59 @@ public class Pistol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isReloading) return;
-
-        HandleShooting();
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (photonView.IsMine)
         {
-            StartCoroutine(Reload());
+            if (isReloading) return;
+
+            HandleShooting();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Reload());
+            }
         }
     }
 
     private void HandleShooting()
     {
-        if (currentAmmo <= 0) return;
+        if ((photonView.IsMine))
+        {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            nextFireTime = Time.time + fireRate;
-            ShootPistol();
-        }
-        else if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-            ShootAutoGun();
+
+            if (currentAmmo <= 0) return;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                nextFireTime = Time.time + fireRate;
+                ShootPistol();
+            }
+            else if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+                ShootAutoGun();
+            }
         }
     }
     private void ShootPistol()
     {
-        if (currentAmmo > 0)
+        if (photonView.IsMine)
         {
+            if (currentAmmo > 0)
+            {
 
-            //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
-            InstantiateBullet(firePoint.position, transform.up);
+                //InstantiateBullet(firePoint.position, new Vector2 (transform.position.x - transform.position.z,transform.position.y).normalized);
+                InstantiateBullet(firePoint.position, transform.up);
 
-            // InstantiateBullet(firePoint.position, transform.right);
+                // InstantiateBullet(firePoint.position, transform.right);
 
-            PlayShootSound();
-            currentAmmo--;
+                PlayShootSound();
+                currentAmmo--;
+            }
         }
     }
     private void ShootAutoGun()
     {
+        if (photonView.IsMine) { 
         if (currentAmmo > 0)
         {
 
@@ -77,11 +95,15 @@ public class Pistol : MonoBehaviour
             currentAmmo--;
         }
     }
+    }
 
     private void InstantiateBullet(Vector3 position, Vector3 direction)
     {
-        GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(direction);
+        if (photonView.IsMine)
+        {
+            GameObject bullet = PhotonNetwork.Instantiate("squirrel_hit", position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().SetDirection(direction);
+        }
     }
     private void PlayShootSound()
     {

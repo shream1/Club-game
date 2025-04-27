@@ -13,6 +13,8 @@ public class CameraFollow : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
         {
             Destroy(GetComponent<CameraFollow>());
+            Destroy(GetComponentInChildren<CameraFollow>());
+            Destroy(GetComponentInChildren<Camera>());
 
         }
         if (photonView.IsMine) 

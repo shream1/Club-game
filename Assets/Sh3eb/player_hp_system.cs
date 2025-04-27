@@ -1,7 +1,7 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class player_hp_system : MonoBehaviourPun
 {
@@ -13,6 +13,9 @@ public class player_hp_system : MonoBehaviourPun
     public TextMeshProUGUI HpText;
     public GameObject[] images;
     [SerializeField] private GameObject deathEffect;
+
+    public PlayerSpawner  ps;
+    [PunRPC]
     void Start()
     {
         if (!photonView.IsMine)
@@ -22,10 +25,11 @@ public class player_hp_system : MonoBehaviourPun
         else
         {
             hp = new HP();
+            ps = GameObject.FindWithTag("GameController").GetComponent<PlayerSpawner>();
         }
         
     }
-
+    [PunRPC]
     // Update is called once per frame
     void Update()
     {
@@ -39,7 +43,7 @@ public class player_hp_system : MonoBehaviourPun
             HPUI();
         }
     }
-
+    [PunRPC]
     private void HPUI()
     {
         if (photonView.IsMine) {
@@ -83,6 +87,7 @@ public class player_hp_system : MonoBehaviourPun
             }
         }  
     }
+    [PunRPC]
     private void heal_system()
     {
         if (!photonView.IsMine) return;
@@ -96,19 +101,22 @@ public class player_hp_system : MonoBehaviourPun
             timer += time;
         }
     }
+    [PunRPC]
     private void healing()
     {
         if (!photonView.IsMine)return;
             hp.sethp(1*time);
     }
+
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         if (!photonView.IsMine) return;
         hp.sethp(-damage);
         if (health <= 0)
         {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-            gameObject.SetActive(false);
+           PhotonNetwork.Instantiate("die", transform.position, Quaternion.identity);
+            ps.spawn();
         }
         timer = 0;
     }

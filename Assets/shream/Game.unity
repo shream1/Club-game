@@ -3483,7 +3483,7 @@ GameObject:
   - component: {fileID: 1886935382}
   m_Layer: 0
   m_Name: PlayerSpawner
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3501,9 +3501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 8374067254176455343, guid: e8f59739b61c12241bd8a089d5cd39bf, type: 3}
-  - {fileID: 6079665344442154664, guid: b30f3e5d455e1874eb9b4e62c3f100b1, type: 3}
-  - {fileID: 1199473412664228428, guid: 7c8d58f74fa58364fa9fa1bb08c1e3d9, type: 3}
+  - {fileID: 4861750694364352334, guid: 7bc20d32ee0a77d4f9e048674c69b3da, type: 3}
+  - {fileID: 8500428005086341199, guid: 995af26a8780de943a5d548c4d63b7fd, type: 3}
+  - {fileID: 9017299662128411243, guid: 7f49cef6d6dac654b9ae9339f01dcc42, type: 3}
   spawnNodes:
   - {fileID: 514442083}
   - {fileID: 887636540}

@@ -6,12 +6,21 @@ public class GunAim : MonoBehaviourPun
 {
     [SerializeField] private Transform player;
     [SerializeField] private float orbitRadius = 4.4f;
+    [SerializeField] private Camera myCam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (!photonView.IsMine)
         {
             Destroy(GetComponent<GunAim>());
+           // Destroy(GetComponentInChildren<CameraFollow>());
+          //  Destroy(GetComponentInChildren<Camera>());
+        }
+
+        if (photonView.IsMine) 
+        {
+          //  myCam = gameObject.GetComponentInChildren<Camera>();
+
         }
     }
 
@@ -31,7 +40,7 @@ public class GunAim : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = myCam.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0;
 
             Vector3 direction = (mousePosition - player.position).normalized;

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3211064988286335351}
   - component: {fileID: 8606308347364559271}
   - component: {fileID: 854549550604367440}
+  - component: {fileID: 818406740249020775}
   m_Layer: 0
   m_Name: magical_hit
   m_TagString: Untagged
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 190
   m_Sprite: {fileID: 3276911354832549230, guid: 0ac30cba588d7db42b6fb61ff82ce6ef, type: 3}
   m_Color: {r: 0.9811321, g: 0.91553247, b: 0.35635456, a: 1}
   m_FlipX: 0
@@ -5008,7 +5009,7 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -5018,6 +5019,29 @@ MonoBehaviour:
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
 --- !u!114 &854549550604367440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886253232474215468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8606308347364559271}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &818406740249020775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

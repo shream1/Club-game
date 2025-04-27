@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
-using UnityEditor.SceneManagement;
-using UnityEditor.VersionControl;
+
 
 public class Submarin : MonoBehaviourPun
 {

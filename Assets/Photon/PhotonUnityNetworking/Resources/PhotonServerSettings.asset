@@ -40,6 +40,12 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - ConnectBullets
+  - heal_system
+  - healing
+  - HPUI
+  - Start
+  - TakeDamage
+  - Update
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
